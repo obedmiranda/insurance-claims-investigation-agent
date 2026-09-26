@@ -23,3 +23,12 @@ The initial case, `CLM-2026-08421`, represents a residential water-damage claim 
 The documents intentionally contain incomplete and potentially conflicting information to support testing of evidence retrieval, conflict detection, provenance, and verification.
 
 All claim data included in this repository is fictional. Real customer, policyholder, or insurance claim data should never be committed to this repository.
+## Current Status
+
+The project currently includes:
+
+- An initial Claims Investigator agent built with the OpenAI Agents SDK.
+- A PTCF-based system prompt defining the investigator's role and operational boundaries.
+- A synthetic residential water-damage claim dataset for development and testing.
+
+The next milestone is document ingestion, allowing the system to extract and access evidence directly from claim documents.

@@ -29,15 +29,27 @@ def load_pdf(pdf_path: str) -> str:
 def load_claim_documents(claim_number: str) -> list[ClaimDocument]:
     dir_path = Path("data/claims")
     claim_path = dir_path / claim_number
+    documents: list[ClaimDocument] = []
 
-    print(claim_path)
-    files = list(claim_path.glob("*.pdf"))
-    print(files)
-    return []
+    files = sorted(claim_path.glob("*.pdf"))
+
+    for file in files:
+        content = load_pdf(str(file))
+
+        document = ClaimDocument(
+            document_id=file.stem,
+            file_name=file.name,
+            content=content,
+        )
+
+        documents.append(document)
+
+    return documents
 
 
 def main():
-    load_claim_documents("CLM-2026-08421")
+
+    print(load_claim_documents("CLM-2026-08421"))
 
 
 if __name__ == "__main__":

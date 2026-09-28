@@ -19,8 +19,8 @@ def load_pdf(pdf_path: str) -> str:
 
         return "\n".join(pages_text)
 
-    except FileNotFoundError:
-        raise FileNotFoundError(f"PDF file not found: {pdf_path}")
+    except FileNotFoundError as error:
+        raise FileNotFoundError(f"PDF file not found: {pdf_path}") from error
 
     except Exception as error:
         raise RuntimeError(f"Failed to load PDF: {pdf_path}") from error
@@ -30,6 +30,9 @@ def load_claim_documents(claim_number: str) -> list[ClaimDocument]:
     dir_path = Path("data/claims")
     claim_path = dir_path / claim_number
     documents: list[ClaimDocument] = []
+
+    if not claim_path.exists():
+        raise FileNotFoundError(f"Claim directory not found: {claim_path}")
 
     files = sorted(claim_path.glob("*.pdf"))
 
@@ -48,8 +51,8 @@ def load_claim_documents(claim_number: str) -> list[ClaimDocument]:
 
 
 def main():
-
-    print(load_claim_documents("CLM-2026-08421"))
+    documents = load_claim_documents("CLM-2026-08421")
+    print(documents)
 
 
 if __name__ == "__main__":

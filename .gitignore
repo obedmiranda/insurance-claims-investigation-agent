@@ -220,3 +220,6 @@ __marimo__/
 # Project generated output
 output/*
 !output/.gitkeep
+
+.DS_Store
+data/.DS_Store

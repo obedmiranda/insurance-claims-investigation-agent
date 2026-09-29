@@ -36,6 +36,9 @@ def load_claim_documents(claim_number: str) -> list[ClaimDocument]:
 
     files = sorted(claim_path.glob("*.pdf"))
 
+    if not files:
+        raise FileNotFoundError(f"No PDF documents found for claim: {claim_number}")
+
     for file in files:
         content = load_pdf(str(file))
 

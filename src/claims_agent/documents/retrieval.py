@@ -6,10 +6,17 @@ def _chunk_text(text: str, size: int, overlap: int) -> list[str]:
     position = 0
     chunked_text: list[str] = []
 
+    if size <= 0:
+        raise ValueError("Chunk size must be greater than zero")
+
+    if overlap < 0:
+        raise ValueError("Overlap cannot be negative")
+
     if overlap >= size:
         raise ValueError(
             f"Overlap ({overlap}) must be smaller than chunk size ({size})"
         )
+
     while position < len(text):
         slice_text = text[position : position + size]
         chunked_text.append(slice_text)

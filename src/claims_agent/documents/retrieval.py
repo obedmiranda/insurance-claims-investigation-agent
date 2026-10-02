@@ -2,7 +2,7 @@ from claims_agent.documents.loader import load_claim_documents
 from claims_agent.models.retrieved_evidence import RetrievedEvidence
 
 
-def _chunk_text(text: str, size: int, overlap: int) -> list[str]:
+def chunk_text(text: str, size: int, overlap: int) -> list[str]:
     position = 0
     chunked_text: list[str] = []
 
@@ -33,7 +33,7 @@ def search_claim_documents(
     documents = load_claim_documents(claim_number)
 
     for document in documents:
-        chunks = _chunk_text(document.content, 500, 100)
+        chunks = chunk_text(document.content, 500, 100)
 
         print(chunks)
 

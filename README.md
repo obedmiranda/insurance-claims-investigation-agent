@@ -44,3 +44,15 @@ The retrieval layer currently splits extracted document text into fixed-size chu
 Overlap is used to preserve context that may otherwise be lost at chunk boundaries.
 
 Chunking parameters are validated to prevent invalid configurations such as negative overlap or overlap greater than or equal to the chunk size.
+
+## Project Structure
+
+```text
+src/claims_agent/
+├── agents/       # AI agents responsible for claim investigation
+├── documents/    # Document loading, chunking, and retrieval
+└── models/       # Structured data models used across the system
+
+data/claims/      # Synthetic claim documents used for development
+tests/            # Automated tests
+output/           # Generated investigation reports

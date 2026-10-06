@@ -56,3 +56,11 @@ src/claims_agent/
 data/claims/      # Synthetic claim documents used for development
 tests/            # Automated tests
 output/           # Generated investigation reports
+
+### Document Retrieval
+
+The retrieval layer is responsible for identifying relevant evidence across the documents associated with a claim.
+
+Retrieval results are designed to preserve the source of the evidence so that investigation findings can later be traced back to the original claim document.
+
+The initial retrieval implementation uses document chunks as the unit of search. Future iterations will explore semantic retrieval as the project evolves.

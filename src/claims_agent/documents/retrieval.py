@@ -40,6 +40,10 @@ def search_claim_documents(
     return []
 
 
+def normalize_text(text: str) -> str:
+    return text.lower().strip()
+
+
 def main():
     results = search_claim_documents(
         claim_number="CLM-2026-08421",

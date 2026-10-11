@@ -44,6 +44,11 @@ def normalize_text(text: str) -> str:
     return text.lower().strip()
 
 
+def get_query_terms(query: str) -> list[str]:
+    normalized_query = normalize_text(query)
+    return normalized_query.split()
+
+
 def main():
     results = search_claim_documents(
         claim_number="CLM-2026-08421",

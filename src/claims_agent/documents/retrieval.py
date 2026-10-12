@@ -87,6 +87,7 @@ def search_claim_documents(
                     document_id=document.document_id,
                     file_name=document.file_name,
                     text=chunk,
+                    relevance_score=score,
                 )
                 retrieved_evidence.append(evidence)
 

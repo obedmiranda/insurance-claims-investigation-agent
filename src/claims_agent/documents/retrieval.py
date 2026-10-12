@@ -7,6 +7,18 @@ def normalize_text(text: str) -> str:
 
 
 def get_query_terms(query: str) -> list[str]:
+    """
+    Convert a search query into individual terms for lexical retrieval.
+
+    The query is first normalized and then split by whitespace.
+
+    Example:
+        "Previous Plumbing LEAK"
+        -> ["previous", "plumbing", "leak"]
+
+    This is a basic lexical approach. It does not currently remove
+    stop words, perform stemming, or understand semantic meaning.
+    """
     normalized_query = normalize_text(query)
     return normalized_query.split()
 
@@ -44,7 +56,22 @@ def search_claim_documents(
     claim_number: str,
     query: str,
 ) -> list[RetrievedEvidence]:
+    """
+    Search the documents associated with a claim for evidence relevant
+    to an investigation query.
 
+    The retrieval process:
+    1. Loads all documents associated with the claim.
+    2. Extracts searchable terms from the query.
+    3. Splits each document into overlapping text chunks.
+    4. Compares each chunk against the query terms.
+    5. Selects chunks considered relevant to the query.
+    6. Returns the relevant chunks as RetrievedEvidence while preserving
+       their source document information.
+
+    This function is responsible for retrieving evidence, not interpreting
+    the evidence or making claim investigation decisions.
+    """
     documents = load_claim_documents(claim_number)
 
     for document in documents:

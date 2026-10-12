@@ -73,13 +73,24 @@ def search_claim_documents(
     the evidence or making claim investigation decisions.
     """
     documents = load_claim_documents(claim_number)
+    query_terms = get_query_terms(query)
+    retrieved_evidence: list[RetrievedEvidence] = []
 
     for document in documents:
         chunks = chunk_text(document.content, 500, 100)
 
-        print(chunks)
+        for chunk in chunks:
+            score = count_matching_terms(chunk, query_terms)
 
-    return []
+            if score > 0:
+                evidence = RetrievedEvidence(
+                    document_id=document.document_id,
+                    file_name=document.file_name,
+                    text=chunk,
+                )
+                retrieved_evidence.append(evidence)
+
+    return retrieved_evidence
 
 
 def main():

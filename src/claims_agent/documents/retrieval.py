@@ -49,6 +49,12 @@ def get_query_terms(query: str) -> list[str]:
     return normalized_query.split()
 
 
+def count_matching_terms(text: str, query_terms: list[str]) -> int:
+    normalized_text = normalize_text(text)
+
+    return sum(term in normalized_text for term in query_terms)
+
+
 def main():
     results = search_claim_documents(
         claim_number="CLM-2026-08421",

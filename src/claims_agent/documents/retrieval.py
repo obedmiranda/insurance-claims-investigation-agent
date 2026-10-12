@@ -2,6 +2,21 @@ from claims_agent.documents.loader import load_claim_documents
 from claims_agent.models.retrieved_evidence import RetrievedEvidence
 
 
+def normalize_text(text: str) -> str:
+    return text.lower().strip()
+
+
+def get_query_terms(query: str) -> list[str]:
+    normalized_query = normalize_text(query)
+    return normalized_query.split()
+
+
+def count_matching_terms(text: str, query_terms: list[str]) -> int:
+    normalized_text = normalize_text(text)
+
+    return sum(term in normalized_text for term in query_terms)
+
+
 def chunk_text(text: str, size: int, overlap: int) -> list[str]:
     position = 0
     chunked_text: list[str] = []
@@ -38,21 +53,6 @@ def search_claim_documents(
         print(chunks)
 
     return []
-
-
-def normalize_text(text: str) -> str:
-    return text.lower().strip()
-
-
-def get_query_terms(query: str) -> list[str]:
-    normalized_query = normalize_text(query)
-    return normalized_query.split()
-
-
-def count_matching_terms(text: str, query_terms: list[str]) -> int:
-    normalized_text = normalize_text(text)
-
-    return sum(term in normalized_text for term in query_terms)
 
 
 def main():

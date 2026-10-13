@@ -24,6 +24,24 @@ def get_query_terms(query: str) -> list[str]:
 
 
 def count_matching_terms(text: str, query_terms: list[str]) -> int:
+    """
+    Calculate a basic lexical relevance score for a text chunk.
+
+    The text is normalized and each query term is checked against it.
+    The score represents how many query terms are found in the text.
+
+    Example:
+        query_terms = ["previous", "plumbing", "leak"]
+
+        If a chunk contains "plumbing" and "leak", but not "previous",
+        the resulting score is 2.
+
+    This implementation uses substring matching, so a term such as
+    "leak" will also match words such as "leakage".
+
+    The score measures lexical term overlap only. It does not determine
+    semantic relevance or whether the retrieved text is valid evidence.
+    """
     normalized_text = normalize_text(text)
 
     return sum(term in normalized_text for term in query_terms)
@@ -90,7 +108,7 @@ def search_claim_documents(
                     relevance_score=score,
                 )
                 retrieved_evidence.append(evidence)
-
+    retrieved_evidence.sort(key=lambda evidence: evidence.relevance_score, reverse=True)
     return retrieved_evidence
 
 
@@ -100,7 +118,12 @@ def main():
         query="previous plumbing leak",
     )
 
-    print("Results:", results)
+    # print("Results:", results)
+    for evidence in results:
+        print("Document:", evidence.file_name)
+        print("Score:", evidence.relevance_score)
+        print("Text:", evidence.text)
+        print("-" * 80)
 
 
 if __name__ == "__main__":

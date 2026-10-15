@@ -34,6 +34,7 @@ The project currently includes:
 - PDF document ingestion into structured `ClaimDocument` models.
 - Initial document retrieval infrastructure.
 - Fixed-size document chunking with configurable overlap and parameter validation.
+- Exposed claim document retrieval as an OpenAI Agents SDK function tool.
 
 The current milestone is building the retrieval layer that will identify relevant evidence across claim documents while preserving its source.
 

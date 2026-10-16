@@ -16,6 +16,9 @@ def search_claim_documents_tool(
     Args:
         claim_number: The claim number whose documents should be searched.
         query: A concise description of the evidence to search for.
+
+    Returns:
+        Retrieved evidence ranked by lexical relevance score.
     """
     return search_claim_documents(
         claim_number=claim_number,
